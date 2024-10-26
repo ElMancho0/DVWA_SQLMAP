@@ -1,10 +1,7 @@
-# Utiliza la imagen base de Oracle
 FROM kalilinux/kali-rolling
 
-# Instala vim, OpenSSH y otras aplicaciones necesarias
+#Instala sqlmap
 USER root
 RUN apt-get update  && \
     apt-get install --reinstall ca-certificates -y && \
-    apt install sqlmap -y 
-
-
+    apt-get install sqlmap -y 

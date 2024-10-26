@@ -1,30 +1,23 @@
 services:
   dvwa:
-    image: vulnerables/web-dvwa
+    image: vulnerables/web-dvwa #Imagen de DVWA
     container_name: dvwa
     ports:
-      - "80:80"
+      - "80:80" #Expone el puerto 80 que es el que usa la aplicacion web
     restart: always
     networks:
-      - kali-dvwa-network
+      - kali-dvwa-network #Conecta los contenedores en una sola red, como si fuera LAN
 
   kali:
-    build: 
+    build: #Hace que la instalación de la imagen sea a traves de un dockerfile
       context: .
       dockerfile: kalifile
     container_name: kali
-    tty: true
-    stdin_open: true
-    volumes:
-      - kali-data:/root
+    tty: true #El contenedor siempre correra en segundo plano
+    stdin_open: true #Permite la entrada al contenedor a traves de docker exec
     networks:
       - kali-dvwa-network
-    depends_on:
-      - dvwa
 
-volumes:
-  kali-data:
-
-networks:
+networks: #Crea las redes que usan los contenedores
   kali-dvwa-network:
     driver: bridge
