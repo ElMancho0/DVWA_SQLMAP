@@ -1,0 +1,30 @@
+services:
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - kali-dvwa-network
+
+  kali:
+    build: 
+      context: .
+      dockerfile: kalifile
+    container_name: kali
+    tty: true
+    stdin_open: true
+    volumes:
+      - kali-data:/root
+    networks:
+      - kali-dvwa-network
+    depends_on:
+      - dvwa
+
+volumes:
+  kali-data:
+
+networks:
+  kali-dvwa-network:
+    driver: bridge
