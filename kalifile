@@ -3,7 +3,8 @@ FROM kalilinux/kali-rolling
 
 # Instala vim, OpenSSH y otras aplicaciones necesarias
 USER root
-RUN apt-get update && \
-    apt install sqlmap -y
+RUN apt-get update  && \
+    apt-get install --reinstall ca-certificates -y && \
+    apt install sqlmap -y 
 
 
